@@ -1,0 +1,167 @@
+:root {
+  --primary-color: #bbe1fa;
+  --secondary-color: #3282b8;
+  --accent-color: #0f4c75;
+  --tertiary-color: #1b262c;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.6rem;
+  background-color: var(--primary-color);
+  overflow-x: hidden;
+}
+
+h2 {
+  margin-top: 1.2rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.container {
+  width: 120rem;
+  height: 90vh;
+  background-color: white;
+  box-shadow: 0 0 4rem rgba(0, 0, 0, 0.5);
+  margin: 3.2rem auto;
+  padding: 3.2rem 3.2rem;
+  border-radius: 2rem;
+  overflow-y: scroll;
+}
+
+.max-poids-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.max-poids-form label {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+input {
+  width: 100%;
+  height: 4rem;
+  border-radius: 0.4rem;
+  padding: 0 1.2rem;
+  font-size: 1.6rem;
+  background-color: var(--primary-color);
+  color: #000;
+  font-family: inherit;
+  outline: none;
+  border: 1px solid var(--secondary-color);
+}
+
+input:focus {
+  outline: none;
+  border: 3px solid var(--accent-color);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 3.2rem;
+  margin-bottom: 3.2rem;
+  background-color: var(--secondary-color);
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  border-radius: 1.2rem;
+  overflow: hidden;
+}
+
+table thead {
+  background-color: var(--secondary-color);
+  color: #fff;
+}
+
+table tr:nth-child(odd) {
+  background-color: var(--primary-color);
+}
+
+th,
+td {
+  padding: 1.2rem;
+  text-align: center;
+}
+
+thead tr th {
+  background-color: var(--accent-color);
+}
+
+.delete-icon {
+  color: red;
+  cursor: pointer;
+  padding: 1.2rem;
+  background-color: white;
+  border-radius: 1.2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+}
+
+.delete-icon:hover {
+  transform: scale(1.2);
+}
+
+.center--horizontal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-object-btn:link,
+.add-object-btn:visited {
+  display: inline-block;
+  background-color: green;
+  color: white;
+  padding: 1.2rem;
+  border-radius: 1.2rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+}
+
+.add-object-btn:hover,
+.add-object-btn :focus {
+  transform: scale(1.1);
+}
+
+.calculate-result-btn:link,
+.calculate-result-btn:visited {
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: white;
+  padding: 1.2rem;
+  border-radius: 1.2rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+}
+
+.calculate-result-btn:hover,
+.calculate-result-btn :focus {
+  transform: scale(1.1);
+}
+
+.row-for-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 2.4rem;
+}
