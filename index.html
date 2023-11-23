@@ -22,10 +22,16 @@
     <title>Knapsack problem</title>
   </head>
   <body>
+    <div class="overlay"></div>
     <div class="center--horizontal hidden">
       <div class="result-container">
         <p>Le profit maximum que vous pouvez obtenir est :</p>
         <p id="result">0</p>
+        <p class="table-text">Le Tableau :</p>
+        <div class="close-img">
+          <ion-icon name="close-circle-outline"></ion-icon>
+        </div>
+        <div class="result-table-container center--horizontal"></div>
       </div>
     </div>
     <div class="container">
@@ -58,7 +64,7 @@
       </div>
 
       <div class="container-table">
-        <table>
+        <table class="table-principale">
           <thead>
             <tr>
               <th>Objets</th>

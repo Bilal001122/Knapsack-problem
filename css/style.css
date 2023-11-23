@@ -19,7 +19,7 @@ html {
 body {
   font-family: "Poppins", sans-serif;
   font-size: 1.6rem;
-  background-color: var(--primary-color);
+  background: linear-gradient(var(--accent-color), var(--secondary-color));
 }
 
 h2 {
@@ -37,6 +37,7 @@ h2 {
   padding: 3.2rem 3.2rem;
   border-radius: 2rem;
   position: relative;
+  animation: fadeInFromLeft 1s ease-in-out;
 }
 
 .max-poids-form {
@@ -141,6 +142,8 @@ thead tr th {
   text-decoration: none;
   margin: 0 auto;
   transition: all 0.3s ease;
+  animation: fadeInFromLeft 1s ease-in-out;
+  animation-delay: 0.2s;
 }
 
 .add-object-btn:hover,
@@ -161,6 +164,8 @@ thead tr th {
   text-decoration: none;
   margin: 0 auto;
   transition: all 0.3s ease;
+  animation: fadeInFromRight 1s ease-in-out;
+  animation-delay: 0.2s;
 }
 
 .calculate-result-btn:hover,
@@ -178,7 +183,7 @@ thead tr th {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 100;
+  z-index: 200;
   background-color: white;
   padding: 5rem;
   border-radius: 2rem;
@@ -187,6 +192,9 @@ thead tr th {
   flex-direction: column;
   align-items: center;
   gap: 1.2rem;
+  width: 60rem; /* Set a fixed width for the container */
+  white-space: nowrap;
+  overflow-x: hidden;
 }
 
 #result {
@@ -201,4 +209,78 @@ thead tr th {
 
 .hidden {
   display: none;
+}
+
+.close-img {
+  scale: 2;
+  position: absolute;
+  cursor: pointer;
+  top: 2rem;
+  right: 2rem;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 100;
+  display: none;
+}
+
+.table-text {
+  align-self: center;
+  margin-bottom: 1.6rem;
+}
+
+.result-table-container {
+  overflow-x: scroll;
+  width: 100%;
+  padding: 2.4rem;
+}
+
+.table-container {
+  scroll-snap-type: none;
+}
+.table-container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar */
+}
+
+.table-container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar */
+}
+
+.table-de-calcul {
+  width: 80%;
+  margin: 0 !important;
+}
+
+td {
+  animation: fadeInFromLeft 0.2s ease-in-out;
+}
+
+@keyframes fadeInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+
+@keyframes fadeInFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
 }
