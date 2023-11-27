@@ -237,28 +237,32 @@ thead tr th {
 
 .result-table-container {
   overflow-x: scroll;
-  width: 100%;
-  padding: 2.4rem;
-}
-
-.table-container {
-  scroll-snap-type: none;
-}
-.table-container::-webkit-scrollbar {
-  display: none; /* Hide scrollbar */
-}
-
-.table-container::-webkit-scrollbar {
-  display: none; /* Hide scrollbar */
+  overflow-y: scroll;
+  width: 50rem;
+  border-radius: 1.6rem;
+  padding: 0 1.6rem;
 }
 
 .table-de-calcul {
   width: 80%;
-  margin: 0 !important;
+  border-spacing: 0 50px;
+  animation: fadeInFromLeft 0.5s ease-in-out;
 }
 
+.accepted-objects {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.accepted-objects p:not(:first-child) {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--accent-color);
+}
 td {
-  animation: fadeInFromLeft 0.2s ease-in-out;
+  animation: fadeInFromLeft 0.5s ease-in-out;
 }
 
 @keyframes fadeInFromLeft {

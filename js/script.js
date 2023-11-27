@@ -9,12 +9,40 @@ const bigContainer = document.querySelector(".container");
 const closeImageButton = document.querySelector(".close-img");
 const overlay = document.querySelector(".overlay");
 const resultContainer = document.querySelector(".result-container");
+const acceptedObjectsContainer = document.querySelector(".accepted-objects");
 
 const closeImage = function () {
   bigContainer.classList.remove("add-blur");
   resultText.parentElement.parentElement.classList.add("hidden");
   overlay.style.display = "none";
   document.querySelector(".result-table-container").lastChild.remove();
+
+  if (acceptedObjectsContainer.children.length > 1) {
+    while (acceptedObjectsContainer.children.length > 1) {
+      acceptedObjectsContainer.removeChild(acceptedObjectsContainer.lastChild);
+    }
+  }
+};
+
+const findAcceptedObjects = function (
+  globalArray,
+  arrayOfWeights,
+  numberOfObjects,
+  maximumCapacity
+) {
+  let i = numberOfObjects;
+  let j = maximumCapacity;
+  let acceptedObjects = [];
+  while (i > 0 && j > 0) {
+    if (globalArray[i][j] === globalArray[i - 1][j]) {
+      i--;
+    } else {
+      acceptedObjects.push(i);
+      j = j - arrayOfWeights[i];
+      i--;
+    }
+  }
+  return acceptedObjects;
 };
 
 const knapsackAlgorithm = function (
@@ -23,18 +51,18 @@ const knapsackAlgorithm = function (
   maximumCapacity,
   numberOfObjects
 ) {
-  let globalArray = []; // Initialise globalArray
-  arrayOfProfits.unshift(0); // Ajoute un 0 au début du tableau des profits
-  arrayOfWeights.unshift(0); // Ajoute un 0 au début du tableau des poids
+  const profits = [0, ...arrayOfProfits]; // Create a new array with 0 at the beginning
+  const weights = [0, ...arrayOfWeights]; // Create a new array with 0 at the beginning
+
+  let globalArray = []; // Initialize globalArray
   for (let i = 0; i <= numberOfObjects; i++) {
-    globalArray[i] = []; // Initialise les sous-tableaux
+    globalArray[i] = []; // Initialize sub-arrays
     for (let w = 0; w <= maximumCapacity; w++) {
       if (i === 0 || w === 0) {
         globalArray[i][w] = 0;
-      } else if (arrayOfWeights[i] <= w) {
-        console.log(arrayOfWeights[i], w);
+      } else if (weights[i] <= w) {
         globalArray[i][w] = Math.max(
-          arrayOfProfits[i] + globalArray[i - 1][w - arrayOfWeights[i]],
+          profits[i] + globalArray[i - 1][w - weights[i]],
           globalArray[i - 1][w]
         );
       } else {
@@ -42,8 +70,6 @@ const knapsackAlgorithm = function (
       }
     }
   }
-  console.log(arrayOfProfits);
-  console.log(arrayOfWeights);
   return globalArray;
 };
 
@@ -102,19 +128,44 @@ calculateResultBtn.addEventListener("click", function (e) {
   const arrayOfProfits = objects.map((object) => object.objectProfit);
   const arrayOfWeights = objects.map((object) => object.objectWeight);
   const numberOfObjects = arrayOfProfits.length;
-  console.log(arrayOfProfits, arrayOfWeights, maximumCapacity, numberOfObjects);
   const globalArray = knapsackAlgorithm(
-    arrayOfWeights,
     arrayOfProfits,
+    arrayOfWeights,
     maximumCapacity,
     numberOfObjects
   );
-  const tableContainer = document.createElement("div");
+
+  const acceptedObjectsTable = findAcceptedObjects(
+    globalArray,
+    [0, ...arrayOfWeights],
+    numberOfObjects,
+    maximumCapacity
+  );
+  console.log(acceptedObjectsTable);
+  console.log(objects);
+  // objects.forEach(function (object, index) {
+  //   if (acceptedObjectsTable.includes(index + 1)) {
+  //     const newObjectRow = document.createElement("p");
+  //     newObjectRow.innerHTML = `
+  //       <p>${object.objectName}</p>
+  //       `;
+  //     acceptedObjectsContainer.appendChild(newObjectRow);
+  //   }
+  // });
+
+  acceptedObjectsTable.forEach((objectIndex) => {
+    const newObjectRow = document.createElement("p");
+    newObjectRow.innerHTML = `
+        <p>${objects[objectIndex - 1].objectName}</p>
+        `;
+    acceptedObjectsContainer.appendChild(newObjectRow);
+  });
+  //const tableContainer = document.createElement("div");
   const resultTable = document.createElement("table");
-  tableContainer.classList.add("table-container");
+  //tableContainer.classList.add("table-container");
   resultTable.classList.add("table-de-calcul");
 
-  tableContainer.appendChild(resultTable);
+  //tableContainer.appendChild(resultTable);
   resultTable.appendChild(document.createElement("tbody"));
   globalArray.forEach((row) => {
     const newRow = document.createElement("tr");
@@ -126,6 +177,6 @@ calculateResultBtn.addEventListener("click", function (e) {
     });
     resultTable.firstChild.appendChild(newRow);
   });
-  document.querySelector(".result-table-container").appendChild(tableContainer);
+  document.querySelector(".result-table-container").appendChild(resultTable);
   resultText.textContent = globalArray[numberOfObjects][maximumCapacity];
 });
